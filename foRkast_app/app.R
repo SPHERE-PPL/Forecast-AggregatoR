@@ -4,14 +4,14 @@ library(stringr)
 
 # UI code block
 ui<-fluidPage(
-  titlePanel("Open FoRkast"),
+  titlePanel("FoRkast"),
   sidebarLayout(
     sidebarPanel(
       selectInput("original_owner", "Original Owner", choices = "TuringPPL"),
       selectInput("repo", "Repo", choices = "Competition-Example-Mpox"),
       textInput("target_file", "Target File", value = "forecast.csv"),
       textInput("destination_folder", "Destination Folder", value = paste0(getwd(),"/Contest_1_Entries")),
-      actionButton("run_button", "Run Fork Finder"),
+      actionButton("run_button", "Run FoRkast Finder"),
       width = 6
     ),
     mainPanel(
@@ -99,20 +99,21 @@ server <- function(input, output) {
       ###################################################################################
       if(length(errors)==0){
         
+        
         # Check if the data.frame has the correct columns
         if(!all(c("who_region", "month_start","Estimate") %in% colnames(df))){
           errors <- c(errors, "Incorrect column names")
         }
-        
+
         # Check if the forecast column is numeric
         if(!all(str_detect(df$Estimate, "^-?\\d+(\\.\\d+)?$"))){
           errors <- c(errors, "Forecast column is not numeric")
         }
-        
+
         # Check if the forecast column contains -9999
         if(-9999 %in% df$Estimate){
           errors <- c(errors, "Forecast column contains -9999")
-        } 
+        }
         
         
       }
@@ -145,7 +146,7 @@ server <- function(input, output) {
         
       }
     }
-    output$status <- renderText("Fork Finder Completed")
+    output$status <- renderText("FoRkast Finder Completed")
     
   })
 }
