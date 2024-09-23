@@ -17,7 +17,9 @@ ui<-fluidPage(
       h3(textOutput("status"))
     ),
     mainPanel(
-      h1("Welcome to FoRkast")
+      h3("Welcome to FoRkast"),
+      p("FoRkast is a tool that finds all forked repos taking part in forecasting
+        competitions and checks each submission before cloning the repos locally."),
     )
   ),
   theme = shinytheme("flatly")
@@ -78,7 +80,7 @@ server <- function(input, output,session) {
         
       } else {
         ################################################################################### 
-        # CHECK THE FORECAST FOR ERRORS             #######################################
+        # CHECK THE FORECAST FOR ERRORS USING SUBMISSION TESTS#############################
         ###################################################################################
         
         if(repo=="Competition-Example-Mpox"){
