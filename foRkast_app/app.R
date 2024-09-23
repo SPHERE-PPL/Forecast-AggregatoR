@@ -91,13 +91,13 @@ server <- function(input, output,session) {
       
       
       ################################################################################### 
-      # CLONE REPOS AND PUT ERRORS IN FOLDER           ##################################
+      # CLONE PASSING REPOS AND PUT ERRORS IN NAMED FOLDER           ####################
       ###################################################################################
       
       if(length(errors)==0){ # Check if there are no errors
         
         # Construct the full path for cloning
-        clone_path <- file.path(destination_folder, repo_name)
+        clone_path <- file.path(destination_folder, paste0(owner,"_",repo_name))
         
         # Clone the repository using `sprintf` for clearer formatting
         system_command <- sprintf("git clone %s %s", fork_url, paste0("'",clone_path,"'"))
@@ -105,11 +105,15 @@ server <- function(input, output,session) {
         
       }else{ # If there are errors
         # Construct the full path for cloning
-        clone_path <- file.path(errors_folder, repo_name)
+        clone_path <- file.path(errors_folder, paste0(owner,"_",repo_name))
+        
+        if (!dir.exists(clone_path)) {
+          dir.create(clone_path)
+        }
         
         # Clone the repository using `sprintf` for clearer formatting
         system_command <- sprintf("git clone %s %s", fork_url, paste0("'",clone_path,"'"))
-        system(system_command)
+        # system(system_command)
         
         # Write the errors to a text file
         writeLines(unlist(errors), file.path(clone_path, "errors.txt"))
