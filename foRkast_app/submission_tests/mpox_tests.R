@@ -20,7 +20,7 @@ colnames(df) <- col_names
 rm(lines, col_names, data_rows,file_content_encoded,file_content)
 
  # Check if the data.frame has the correct columns
-if(!all(c("who_region", "month_star","Estimate") %in% colnames(df))){
+if(!all(c("who_region", "month_start","Estimate") %in% colnames(df))){
     errors <- c(errors, "Incorrect column names")
 }
   
