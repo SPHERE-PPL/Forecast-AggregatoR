@@ -5,6 +5,15 @@ library(gh)
 library(stringr)
 
 
+sidebarPanel2 <- function (..., out = NULL, width = 4) 
+{
+  div(class = paste0("col-sm-", width), 
+      tags$form(class = "well", ...),
+      out
+  )
+}
+
+
 owner_choices<-c("TuringPPL")
 contest_choices<-c("Competition-Example-Mpox")
 
@@ -14,12 +23,13 @@ contest_choices<-c("Competition-Example-Mpox")
 ui<-fluidPage(
   theme = shinytheme("flatly"),
   
-  titlePanel("FoRkast"),
+  titlePanel(""),
   sidebarLayout(
     
-    sidebarPanel(
-      selectInput("contest_owner", "Owner", choices = owner_choices),
-      selectInput("repo", "Repo", choices = contest_choices),
+    sidebarPanel2(
+
+      radioButtons("contest_owner", "Owner", choices = owner_choices,inline = TRUE),
+      radioButtons("repo", "Repo", choices = contest_choices,inline = TRUE),
       
       textInput("target_file", "Target File To Check", value = "forecast.csv"),
       textInput("destination_folder", "Destination Folder", value = paste0(getwd(),"/Contest_Entries")),
@@ -27,24 +37,39 @@ ui<-fluidPage(
       actionButton(inputId = "run_button", label = "Run FoRkast",icon = icon("play"),class = "btn-lg btn-success"),
       tags$br(),
       textOutput("status"),
+      out = img(src='FoRkast2.png',width = 250),
       
-      
-      align = "center",
-      tags$style(type="text/css", "#target_file { text-align:center;}"),
-      tags$style(type="text/css", "#destination_folder { text-align:center;}"),
+      width = 4,
       tags$style(type = "text/css", "#status { color: #18bc9c; font-size: 18px; font-weight: bold;}") 
     ),
     
     mainPanel(
-      h3("Welcome to FoRkast"),
+      h2("Welcome to FoRkast"),
       p("FoRkast is a tool that finds all forked repos taking part in forecasting
         competitions and checks each submission before cloning the repos locally."),
+      
+      h3("Instructions"),
+      p("1. Select the owner of the competition"),
+      p("2. Select the competition repo"),
+      p("3. Enter the name of the file to check (this is usually a forecast in a csv format)"),
+      p("4. Enter the destination folder where the repos will be cloned (this will autofill with the FoRkast app directory)"),
+      p("5. Click the 'Run FoRkast' button to start the process"),
+      
+      h3("Outputs"),
+      p("All submissions that pass the checks will be cloned to the destination folder (each within their own folder named owner_repo"),
+      p("If there are any errors, the repos with issues will be named in the folder called 'Errors'. Each repo will have a text file with the errors listed."),
+      
+      h3("Customising FoRkast"),
+      p("This app can be editted to find forks of any repo and check any file and the checks can also be customised to suit the competition requirements. 
+        Head to the ",tags$a(href="https://github.com/TuringPPL/foRkast", "TuringPPL FoRkast")," to find the code and make changes. This app can also be used in conjunction 
+        with our contest template repo to run your own forecasting contests: ",
+        tags$a(href="https://github.com/TuringPPL/forecasting-contest-template", "TuringPPL Forecasting Contest Template"),
+        "."),
+      
     )
     
   )
 )
-
-
 
 
 # Define the server logic for the Shiny app
