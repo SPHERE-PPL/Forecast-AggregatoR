@@ -1,12 +1,11 @@
 library(shiny)
-library(shinythemes)
+library(bslib)
 library(shinyFiles)
 library(gh)
 library(stringr)
 
 
-sidebarPanel2 <- function (..., out = NULL, width = 4) 
-{
+sidebarPanel2 <- function (..., out = NULL, width = 4) {
   div(class = paste0("col-sm-", width), 
       tags$form(class = "well", ...),
       out
@@ -21,7 +20,10 @@ contest_choices<-c("Competition-Example-Mpox")
 
 # UI code block
 ui<-fluidPage(
-  theme = shinytheme("flatly"),
+  theme = bs_theme(
+    bootswatch = "minty",
+    base_font = font_google("Inter"),
+    ),
   
   titlePanel(""),
   sidebarLayout(
@@ -39,8 +41,7 @@ ui<-fluidPage(
       textOutput("status"),
       out = img(src='FoRkast2.png',width = 250),
       
-      width = 4,
-      tags$style(type = "text/css", "#status { color: #18bc9c; font-size: 18px; font-weight: bold;}") 
+      width = 4
     ),
     
     mainPanel(
@@ -76,6 +77,7 @@ ui<-fluidPage(
 
 server <- function(input, output,session) {
   
+  success<-0
   
   observeEvent(input$run_button, {
     
@@ -115,6 +117,7 @@ server <- function(input, output,session) {
       
       # Create Error List
       errors <- list()
+
       
       # Find the contents of the submissions folder in the forked repository
       repo_contents <- gh("GET /repos/:owner/:repo/contents/submission", owner = forked_owner, repo = forked_repo_name)
@@ -190,6 +193,9 @@ server <- function(input, output,session) {
         system_command <- sprintf("git clone %s %s", fork_url, paste0("'",clone_path,"'"))
         system(system_command)
         
+        # Add 1 to the success counter
+        success<-success+1
+        
       }else{ # If there are errors
         # Construct the full path for cloning
         clone_path <- file.path(errors_folder, paste0(forked_owner,"_",forked_repo_name))
@@ -209,7 +215,7 @@ server <- function(input, output,session) {
       }
     }
     
-    output$status <- renderText("FoRkast Complete - See Errors Folder for Repos with Issues")
+    output$status <- renderText(paste0("FoRkast Complete - ",success," repo(s) cloned successfully"))
     
   })
 }
