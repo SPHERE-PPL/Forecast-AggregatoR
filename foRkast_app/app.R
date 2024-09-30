@@ -1,11 +1,12 @@
 library(shiny)
 library(bslib)
-library(shinyFiles)
 library(gh)
 library(stringr)
 
 
-sidebarPanel2 <- function (..., out = NULL, width = 4) {
+sidebar_width<-4
+
+sidebarPanel2 <- function (..., out = NULL, width = sidebar_width) {
   div(class = paste0("col-sm-", width), 
       tags$form(class = "well", ...),
       out
@@ -22,10 +23,11 @@ contest_choices<-c("Competition-Example-Mpox")
 ui<-fluidPage(
   theme = bs_theme(
     bootswatch = "minty",
-    base_font = font_google("Inter"),
+    base_font = font_google("Roboto"),
     ),
   
-  titlePanel(""),
+  h1(id="big-heading", "FoRkast"),
+  tags$style(HTML("#big-heading{color: #78c2ad;}")),
   sidebarLayout(
     
     sidebarPanel2(
@@ -41,7 +43,7 @@ ui<-fluidPage(
       textOutput("status"),
       out = img(src='FoRkast2.png',width = 250),
       
-      width = 4
+      width = sidebar_width
     ),
     
     mainPanel(
@@ -59,6 +61,7 @@ ui<-fluidPage(
       h3("Outputs"),
       p("All submissions that pass the checks will be cloned to the destination folder (each within their own folder named owner_repo"),
       p("If there are any errors, the repos with issues will be named in the folder called 'Errors'. Each repo will have a text file with the errors listed."),
+      p(tags$i("If the cloned repo folders already exist within the destination folder, FoRkast will not overwrite them. To clone any updated repos, please delete the older versions")),
       
       h3("Customising FoRkast"),
       p("This app can be editted to find forks of any repo and check any file and the checks can also be customised to suit the competition requirements. 
@@ -215,7 +218,7 @@ server <- function(input, output,session) {
       }
     }
     
-    output$status <- renderText(paste0("FoRkast Complete - ",success," repo(s) cloned successfully"))
+    output$status <- renderText(paste0("FoRkast Complete - ",success," repo(s) cloned successfully from ",length(fork_clone_urls)," forked repo(s)"))
     
   })
 }
