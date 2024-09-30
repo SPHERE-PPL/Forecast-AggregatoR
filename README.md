@@ -2,6 +2,8 @@
 
 An Rshiny app for collating forecasting contest entries from GitHub
 
-This is very much a Work In Progress so please be patient and don't expect too much just yet!
-
 This RShiny app is designed to be used with the [Turing forecasting contest template](https://github.com/TuringPPL/forecasting-contest-template), which has a standardised structure for submissions.
+
+Here is the app up and running:
+
+![alt text](https://github.com/TuringPPL/foRkast/blob/main/FoRkast_Example.png?raw=true)
