@@ -59,7 +59,7 @@ ui<-fluidPage(
       p("5. Click the 'Run FARA' button to start the process"),
       
       h3("Outputs"),
-      p("All submissions that pass the checks will be cloned to the destination folder (each within their own folder named owner_repo"),
+      p("All submissions that pass the checks will be cloned to the destination folder (each within their own folder named owner_repo)"),
       p("If there are any errors, the repos with issues will be named in the folder called 'Errors'. Each repo will have a text file with the errors listed."),
       p(tags$i("If the cloned repo folders already exist within the destination folder, FARA will not overwrite them. To clone any updated repos, please delete the older versions")),
       
