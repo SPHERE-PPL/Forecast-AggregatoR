@@ -26,7 +26,7 @@ ui<-fluidPage(
     base_font = font_google("Roboto"),
     ),
   
-  h1(id="big-heading", "FoRkast"),
+  h1(id="big-heading", "FARA - Forecasting AggregatoR App"),
   tags$style(HTML("#big-heading{color: #78c2ad;}")),
   sidebarLayout(
     
@@ -38,17 +38,17 @@ ui<-fluidPage(
       textInput("target_file", "Target File To Check", value = "forecast.csv"),
       textInput("destination_folder", "Destination Folder", value = paste0(getwd(),"/Contest_Entries")),
       
-      actionButton(inputId = "run_button", label = "Run FoRkast",icon = icon("play"),class = "btn-lg btn-success"),
+      actionButton(inputId = "run_button", label = "Run FARA",icon = icon("play"),class = "btn-lg btn-success"),
       tags$br(),
       textOutput("status"),
-      out = img(src='FoRkast2.png',width = 250),
+      out = img(src='FAR.png',width = 250),
       
       width = sidebar_width
     ),
     
     mainPanel(
-      h2("Welcome to FoRkast"),
-      p("FoRkast is a tool that finds all forked repos taking part in forecasting
+      h2("Welcome to FARA"),
+      p("FARA (Forecasting AggregatoR App) is a tool that finds all forked repos taking part in forecasting
         competitions and checks each submission before cloning the repos locally."),
       
       h3("Instructions"),
@@ -56,16 +56,16 @@ ui<-fluidPage(
       p("2. Select the competition repo"),
       p("3. Enter the name of the file to check (this is usually a forecast in a csv format)"),
       p("4. Enter the destination folder where the repos will be cloned (this will autofill with the FoRkast app directory)"),
-      p("5. Click the 'Run FoRkast' button to start the process"),
+      p("5. Click the 'Run FARA' button to start the process"),
       
       h3("Outputs"),
       p("All submissions that pass the checks will be cloned to the destination folder (each within their own folder named owner_repo"),
       p("If there are any errors, the repos with issues will be named in the folder called 'Errors'. Each repo will have a text file with the errors listed."),
       p(tags$i("If the cloned repo folders already exist within the destination folder, FoRkast will not overwrite them. To clone any updated repos, please delete the older versions")),
       
-      h3("Customising FoRkast"),
+      h3("Customising FARA"),
       p("This app can be editted to find forks of any repo and check any file and the checks can also be customised to suit the competition requirements. 
-        Head to the ",tags$a(href="https://github.com/TuringPPL/foRkast", "TuringPPL FoRkast")," to find the code and make changes. This app can also be used in conjunction 
+        Head to the ",tags$a(href="https://github.com/TuringPPL/Forecast-AggregatoR", "TuringPPL Forecast-AggregatoR")," to find the code and make changes. This app can also be used in conjunction 
         with our contest template repo to run your own forecasting contests: ",
         tags$a(href="https://github.com/TuringPPL/forecasting-contest-template", "TuringPPL Forecasting Contest Template"),
         "."),
