@@ -26,7 +26,7 @@ ui<-fluidPage(
     base_font = font_google("Roboto"),
     ),
   
-  h1(id="big-heading", "FARA - Forecasting AggregatoR App"),
+  h1(id="big-heading", "FARA - Forecast AggregatoR App"),
   tags$style(HTML("#big-heading{color: #78c2ad;}")),
   sidebarLayout(
     
@@ -48,7 +48,7 @@ ui<-fluidPage(
     
     mainPanel(
       h2("Welcome to FARA"),
-      p("FARA (Forecasting AggregatoR App) is a tool that finds all forked repos taking part in forecasting
+      p("FARA (Forecast AggregatoR App) is a tool that finds all forked repos taking part in forecasting
         competitions and checks each submission before cloning the repos locally."),
       
       h3("Instructions"),
@@ -61,7 +61,7 @@ ui<-fluidPage(
       h3("Outputs"),
       p("All submissions that pass the checks will be cloned to the destination folder (each within their own folder named owner_repo"),
       p("If there are any errors, the repos with issues will be named in the folder called 'Errors'. Each repo will have a text file with the errors listed."),
-      p(tags$i("If the cloned repo folders already exist within the destination folder, FoRkast will not overwrite them. To clone any updated repos, please delete the older versions")),
+      p(tags$i("If the cloned repo folders already exist within the destination folder, FARA will not overwrite them. To clone any updated repos, please delete the older versions")),
       
       h3("Customising FARA"),
       p("This app can be editted to find forks of any repo and check any file and the checks can also be customised to suit the competition requirements. 
