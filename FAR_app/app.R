@@ -14,7 +14,7 @@ sidebarPanel2 <- function (..., out = NULL, width = sidebar_width) {
 }
 
 
-owner_choices<-c("TuringPPL")
+owner_choices<-c("SPHERE-PPL")
 contest_choices<-c("Competition-Example-Mpox")
 
 
@@ -67,7 +67,7 @@ ui<-fluidPage(
       p("This app can be editted to find forks of any repo and check any file and the checks can also be customised to suit the competition requirements. 
         Head to the ",tags$a(href="https://github.com/TuringPPL/Forecast-AggregatoR", "TuringPPL Forecast-AggregatoR")," to find the code and make changes. This app can also be used in conjunction 
         with our contest template repo to run your own forecasting contests: ",
-        tags$a(href="https://github.com/TuringPPL/forecasting-contest-template", "TuringPPL Forecasting Contest Template"),
+        tags$a(href="https://github.com/SPHERE-PPL/forecasting-contest-template", "SHPERE-PPL Forecasting Contest Template"),
         "."),
       
     )
