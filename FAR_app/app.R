@@ -114,7 +114,7 @@ server <- function(input, output,session) {
     
     for (fork_url in fork_clone_urls) {
       
-      forked_owner <- strsplit(fork_url, "/")[[1]][4]
+      forked_owner <- strsplit(fork_url[[1]], "/")[[1]][4]
       forked_repo_name <- str_extract(fork_url, "[^/]+\\.git$")
       forked_repo_name <- str_remove(forked_repo_name, "\\.git$")
       
@@ -148,7 +148,7 @@ server <- function(input, output,session) {
           
           # Split the text into lines
           lines <- strsplit(file_content, "\n")[[1]]
-          
+          lines <- str_remove(lines, "\r")
           # Extract column names from the first line
           col_names <- strsplit(lines[1], ",")[[1]]
           
