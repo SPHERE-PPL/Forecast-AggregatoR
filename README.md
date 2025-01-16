@@ -6,4 +6,4 @@ This RShiny app is designed to be used with the [SPHERE-PPL forecasting contest 
 
 Here is the app up and running, finding the entries of out example competition:
 
-![alt text](https://github.com/TuringPPL/foRkast/blob/main/Example.png?raw=true)
+![alt text](https://github.com/TuringPPL/Forecast-AggregatoR/blob/main/Example.png?raw=true)
