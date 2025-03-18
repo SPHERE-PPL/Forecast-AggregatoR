@@ -176,12 +176,7 @@ server <- function(input, output,session) {
           } 
           
           
-        }else{
-          errors <- c(errors, "No tests available for this competition")
-        }
-        
-        
-        if(repo=="HFC-Lyme-Disease"){
+        }else if(repo=="HFC-Lyme-Disease"){
           # Fetch the file content (assuming it's a text file)
           file_content_encoded <- gh("GET /repos/:owner/:repo/contents/submission/:path",
                                      owner = forked_owner, repo = forked_repo_name, path = target_file)$content
@@ -204,7 +199,7 @@ server <- function(input, output,session) {
           rm(lines, col_names, data_rows,file_content_encoded,file_content)
           
           # Check if the data.frame has the correct columns
-          if(!all(c("Year","Council","Case","Population","Incidence","Lower_95CI","Upper_95CI") %in% colnames(df))){
+          if(!all(c("Year","Council","Incidence","Lower_95CI","Upper_95CI") %in% colnames(df))){
             errors <- c(errors, "Incorrect column names")
           }
           
